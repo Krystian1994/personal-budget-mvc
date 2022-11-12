@@ -194,14 +194,9 @@ class User extends \Core\Model
         $db = static::getDB();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-
         $stmt->execute();
 
-        $numOfEmail = $stmt -> rowCount();
-        echo $numOfEmail;
-        echo $email;
         return $stmt->fetch();
     }
 
@@ -217,9 +212,8 @@ class User extends \Core\Model
     {
         $user = static::findByEmail($email);
 
-        //if ($user) {
         if ($user) {
-            if (password_verify($password, $user->password_hash)) {
+            if (password_verify($password, $user->password)) {
                 return $user;
             }
         }

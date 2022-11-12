@@ -3,6 +3,16 @@
 {% block title %}Log in{% endblock %}
 
 {% block body %}
+
+{% if user.errors is not empty %}
+<div class="d-flex justify-content-center text-danger">Errors:</div>
+<ul>
+    {% for error in user.errors %}
+        <div class="d-flex justify-content-center text-danger">{{ error }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+
     <article>
         <div>
             <blockquote class="blockquote d-block w-100">

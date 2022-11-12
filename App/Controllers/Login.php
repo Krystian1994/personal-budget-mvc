@@ -42,10 +42,10 @@ class Login extends \Core\Controller
 
             Flash::addMessage('Login successful');
 
-            $this->redirect(Auth::getReturnToPage());
+            $this->redirect('/profile/menu');
 
         } else {
-
+            echo 'Nie działa';
             Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
 
             View::renderTemplate('Login/new.html', [
