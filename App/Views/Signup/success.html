@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <blockquote class="blockquote d-block w-100">
+            <h2 class="text-center p-5">Rejestracja przebiegła pomyślnie!</h2>
+        </blockquote>
+        <blockquote class="blockquote d-block w-100">
+            <h4 class="m-3">Teraz możesz zalogować się do swojego profilu.</h4>
+        </blockquote>
+        <div class="justify-content-center m-5">
+            <a class="btn btn-success btn-lg d-md-inline col-md-3 m-3" href="/login/new" role="button">Logowanie</a>
+        </div>
+    </div>
+{% endblock %}

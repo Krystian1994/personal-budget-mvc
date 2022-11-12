@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <article>
+        <div>
+            <blockquote class="blockquote d-block w-100">
+                <h2 class="text-center p-5">Witaj w mobilnym budżecie osobistym</h2>
+            </blockquote>
+        </div>
+        <div class="row m-5">
+            <div class="col-md-2 border-right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                    class="bi bi-calendar-check" viewBox="0 0 16 16">
+                    <path
+                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                    <path
+                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                </svg>
+                <i class="bi bi-calendar-check"></i>
+            </div>
+            <div id="carouselExampleSlidesOnly" class="carousel slide col-md-10" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <blockquote class="blockquote d-block w-100">
+                            <h3 class="m-3">Chcesz mieć stały dostęp do informacji o swoim budżecie?</h3>
+                        </blockquote>
+                    </div>
+                    <div class="carousel-item">
+                        <blockquote class="blockquote d-block w-100">
+                            <h3 class="m-3">Masz problem z kontrolowaniem wydatków?</h3>
+                        </blockquote>
+                    </div>
+                    <div class="carousel-item">
+                        <blockquote class="blockquote d-block w-100">
+                            <h3 class="m-3">Ta strona jest właśnie dla Ciebie!</h3>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-around m-5">
+            <a class="btn btn-danger btn-lg d-md-inline col-md-3 m-3" href="/signup/new"
+                role="button">Rejestracja</a>
+
+            <a class="btn btn-success btn-lg d-md-inline col-md-3 m-3" href="/login/new" role="button">Logowanie</a>
+        </div>
+    </article>
+    
+{% endblock %}
