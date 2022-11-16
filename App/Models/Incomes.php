@@ -10,7 +10,7 @@ use \App\Token;
  *
  * PHP version 7.0
  */
-class User extends \Core\Model
+class Incomes extends \Core\Model
 {
     /**
      * Error messages
@@ -40,10 +40,19 @@ class User extends \Core\Model
 
             $idIncomeCategory = $this->getIdOfIncomesCategory();
             
-            //piszemy dalszy ciag dodania przychodu ze sarego skryptu php.
+            $sql = 'INSERT INTO incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment) VALUES (:user_id, :idIncomeCategory, :amount, :date, :comment)';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_STR);
+            $stmt->bindValue(':idIncomeCategory', $idIncomeCategory, PDO::PARAM_STR);
+            $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
+            $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
+            $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
+            $stmt->execute();
+            
             return true;
         }
-
         return false;
     }
 
@@ -83,21 +92,5 @@ class User extends \Core\Model
             $this->errors[] = "Nie wybrano kategorii przychodu.";
         }
     }
-
-    public static function findByID($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = :id';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-
-        $stmt->execute();
-
-        return $stmt->fetch();
-    }
-
 }
 

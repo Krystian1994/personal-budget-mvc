@@ -22,7 +22,6 @@ class Profile extends Authenticated
     protected function before()
     {
         parent::before();
-
         $this->user = Auth::getUser();
     }
 
@@ -38,26 +37,6 @@ class Profile extends Authenticated
         ]);
     }
 
-    public function incomeAction()
-    {
-        View::renderTemplate('Profile/income.html', [
-            'user' => $this->user
-        ]);
-    }
-
-    public function expenseAction()
-    {
-        View::renderTemplate('Profile/expense.html', [
-            'user' => $this->user
-        ]);
-    }
-
-    public function balanceAction()
-    {
-        View::renderTemplate('Profile/balance.html', [
-            'user' => $this->user
-        ]);
-    }
     /**
      * Show the form for editing the profile
      *

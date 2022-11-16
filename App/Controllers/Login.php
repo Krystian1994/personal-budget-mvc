@@ -45,7 +45,6 @@ class Login extends \Core\Controller
             $this->redirect('/profile/menu');
 
         } else {
-            echo 'Nie działa';
             Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
 
             View::renderTemplate('Login/new.html', [

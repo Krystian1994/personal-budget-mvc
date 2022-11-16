@@ -151,7 +151,7 @@ class User extends \Core\Model
             $this->errors[] = 'Błędny email';
         }
         if (static::emailExists($this->email)) {
-            $this->errors[] = 'Podany email jest został użyty';
+            $this->errors[] = 'Podany email został użyty';
         }
 
         // Password
@@ -271,14 +271,5 @@ class User extends \Core\Model
 
         return $stmt->execute();
     }
-
-    /**
-     * Activate the user account with the specified activation token
-     *
-     * @param string $value Activation token from the URL
-     *
-     * @return void
-     */
-
 }
 
