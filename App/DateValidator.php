@@ -11,10 +11,8 @@ use \App\Flash;
  *
  * PHP version 7.0
  */
-class DateValidator extends \Core\Model
+class DateValidator
 {
-    public $errors = [];
-
     public static function getActualDate(){
         return date('Y-m-d');
     }
