@@ -36,11 +36,16 @@ class Income extends Authenticated
         $income = new Incomes($_POST);
  
         if ($income->addIncome()) {
-            echo "Przychód dodano!";
+            Flash::addMessage('Przychód został dodany.',Flash::INFO);
+
             $this->redirect('/Income/new');
         } else {
-            echo "Przychodu nie dodano";
-            $this->redirect('/Income/new');
+            Flash::addMessage('Błąd. Przychód nie został dodany.',Flash::WARNING);
+
+            View::renderTemplate('Income/income.html', [
+                'income' => $income,
+                'user' => $this->user
+            ]);
         }
     }
 }

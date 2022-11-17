@@ -81,9 +81,10 @@ class Balance extends Authenticated
 
             return $this->rendering($startDate,$endDate);
         } else {
+            Flash::addMessage('Podałeś nieprawidłowy zakres dat.', Flash::INFO);
+
             View::renderTemplate('Balance/balance.html', [
-                'user' => $this->user,
-                'datevalidator' => $this -> errors
+                'user' => $this->user
             ]);
         }
     }
@@ -107,7 +108,6 @@ class Balance extends Authenticated
         ]);
     }
 
-
     private function sum($array){
         $sum = 0;
         foreach($array as $row){
@@ -117,10 +117,12 @@ class Balance extends Authenticated
     }
 
     private function getStatement($firstArg, $secondArg){
-        if($firstArg >= $secondArg){
+        if($firstArg > $secondArg){
             return "Dobrze zarządzasz budżetem. Twój bilans wynosi: ";
-        } else {
+        } else if($firstArg < $secondArg){
             return "Wpadasz w długi. Twój bilans wynosi: ";
+        } else {
+            return "Twój bilans wynosi: ";
         }
     }
 

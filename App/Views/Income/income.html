@@ -4,10 +4,10 @@
 
 {% block body %}
 
-{% if user.errors is not empty %}
+{% if income.errors is not empty %}
 <div class="d-flex justify-content-center text-danger">Errors:</div>
 <ul>
-    {% for error in user.errors %}
+    {% for error in income.errors %}
         <div class="d-flex justify-content-center text-danger">{{ error }}</div>
     {% endfor %}
 </ul>

@@ -26,6 +26,13 @@
                     </svg> personalbudget.pl</h1>
             </div>
         </header>
+
+        {% for message in flash_messages %}
+            <div class="alert alert-{{ message.type }}">
+                {{ message.body }}
+            </div>
+        {% endfor %}
+
         {% block body %}
         {% endblock %}
         <blockquote class="blockquote bg-primary text-white text-right p-2 mt-5">

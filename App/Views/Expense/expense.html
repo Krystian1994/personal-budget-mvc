@@ -4,6 +4,15 @@
 
 {% block body %}
 
+{% if expense.errors is not empty %}
+<div class="d-flex justify-content-center text-danger">Errors:</div>
+<ul>
+    {% for error in expense.errors %}
+        <div class="d-flex justify-content-center text-danger">{{ error }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <article>
     <div>
         <blockquote class="blockquote d-block w-100">

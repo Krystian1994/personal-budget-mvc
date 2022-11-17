@@ -60,31 +60,5 @@ class Balances extends \Core\Model
 
         return $expensesBudget;
     }
-
-    // public function validateExpense()
-    // {
-    //     // Amount
-    //     if ((!isset($this->amount)) || ($this->amount <= 0)) {
-    //         $this->errors[]  = "Wprowadzona kwota wydatku jest nieprawidłowa.";
-    //     }
-
-    //     // Comment
-    //     $this->comment = htmlentities($this->comment,ENT_QUOTES,"UTF-8");
-
-    //     // Date
-    //     if(!isset($this->date)){
-    //         $this->errors[] = "Nie podano daty wydatku.";
-    //     }
-        
-    //     // Pay
-    //     if(!isset($this->pay)){
-    //         $this->errors[] = "Nie wybrano metody płatności.";
-    //     }
-
-    //     // Expense
-    //     if(!isset($this->expense)){
-    //         $this->errors[] = "Nie wybrano kategorii wydatku.";
-    //     }
-    // }
 }
 

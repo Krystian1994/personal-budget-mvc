@@ -36,11 +36,16 @@ class Expense extends Authenticated
         $expense = new Expenses($_POST);
 
         if ($expense->addExpense()) {
-            echo "Wydatek dodano!";
+            Flash::addMessage('Wydatek został dodany.', Flash::INFO);
+            
             $this->redirect('/Expense/new');
         } else {
-            echo "Wydatku nie dodano";
-            $this->redirect('/Expense/new');
+            Flash::addMessage('Błąd. Wydatek nie został dodany.', Flash::WARNING);
+
+            View::renderTemplate('Expense/expense.html', [
+                'expense' => $expense,
+                'user' => $this->user
+            ]);
         }
     }
 }

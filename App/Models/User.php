@@ -26,8 +26,7 @@ class User extends \Core\Model
      *
      * @return void
      */
-    public function __construct($data = [])
-    {
+    public function __construct($data = []){
         foreach ($data as $key => $value) {
             $this->$key = $value;
         };
@@ -67,8 +66,7 @@ class User extends \Core\Model
         return false;
     }
 
-    private function recaptchaCheck()
-    {
+    private function recaptchaCheck(){
          //sprawdzamy recaptche
          $secret = '6LcA9_khAAAAAExJH8XKebdCC0-SwL6ZZh87eSZB';
          //łączymy się z serwerem googla w celu weryfikacji recaptchy
@@ -81,8 +79,7 @@ class User extends \Core\Model
          }
     }
 
-    protected function getId($password_hash)
-    {
+    protected function getId($password_hash){
         $sql = 'SELECT id FROM users WHERE username = :name AND password = :password_hash';
 
         $db = static::getDB();
@@ -99,8 +96,7 @@ class User extends \Core\Model
         return $userId;
     }
 
-    protected function addExpenses($userId)
-    {
+    protected function addExpenses($userId){
         $sql = 'INSERT INTO expenses_category_assigned_to_users(user_id,name) SELECT users.id, expenses_category_default.name FROM users, expenses_category_default WHERE users.id = :userId';
 
         $db = static::getDB();
@@ -111,8 +107,7 @@ class User extends \Core\Model
         return $stmt->execute();
     }
 
-    protected function addIncomes($userId)
-    {
+    protected function addIncomes($userId){
         $sql = 'INSERT INTO incomes_category_assigned_to_users(user_id,name) SELECT users.id, incomes_category_default.name FROM users, incomes_category_default WHERE users.id = :userId';
 
         $db = static::getDB();
@@ -123,8 +118,7 @@ class User extends \Core\Model
         return $stmt->execute();
     }
 
-    protected function paymentCategories($userId)
-    {
+    protected function paymentCategories($userId){
         $sql = 'INSERT INTO payment_methods_assigned_to_users(user_id,name) SELECT users.id, payment_methods_default.name FROM users, payment_methods_default WHERE users.id = :userId';
 
         $db = static::getDB();
@@ -139,8 +133,7 @@ class User extends \Core\Model
      *
      * @return void
      */
-    public function validate()
-    {
+    public function validate(){
         // Name
         if ($this->name == '') {
             $this->errors[] = 'Imię jest wymagane';
@@ -175,8 +168,7 @@ class User extends \Core\Model
      *
      * @return boolean  True if a record already exists with the specified email, false otherwise
      */
-    public static function emailExists($email)
-    {
+    public static function emailExists($email){
         return static::findByEmail($email) !== false;
     }
 
@@ -187,8 +179,7 @@ class User extends \Core\Model
      *
      * @return mixed User object if found, false otherwise
      */
-    public static function findByEmail($email)
-    {
+    public static function findByEmail($email){
         $sql = 'SELECT * FROM users WHERE email = :email';
 
         $db = static::getDB();
@@ -208,16 +199,15 @@ class User extends \Core\Model
      *
      * @return mixed  The user object or false if authentication fails
      */
-    public static function authenticate($email, $password)
-    {
+    public static function authenticate($email, $password){
         $user = static::findByEmail($email);
 
         if ($user) {
             if (password_verify($password, $user->password)) {
                 return $user;
             }
+            return false;
         }
-
         return false;
     }
 
@@ -228,8 +218,7 @@ class User extends \Core\Model
      *
      * @return mixed User object if found, false otherwise
      */
-    public static function findByID($id)
-    {
+    public static function findByID($id){
         $sql = 'SELECT * FROM users WHERE id = :id';
 
         $db = static::getDB();
@@ -255,7 +244,6 @@ class User extends \Core\Model
         $hashed_token = $token->getHash();
         $this->remember_token = $token->getValue();
 
-        //$expiry_timestamp = time() + 60 * 60 * 24 * 30;  // 30 days from now
         $this->expiry_timestamp = time() + 60 * 60 * 24 * 30;  // 30 days from now
 
         $sql = 'INSERT INTO remembered_logins (token_hash, user_id, expires_at)
@@ -266,7 +254,6 @@ class User extends \Core\Model
 
         $stmt->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
         $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
-        //$stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $expiry_timestamp), PDO::PARAM_STR);
         $stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
 
         return $stmt->execute();
