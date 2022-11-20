@@ -58,11 +58,13 @@ class Profile extends Authenticated
     {
         if ($this->user->updateProfile($_POST)) {
 
-            Flash::addMessage('Changes saved');
+            Flash::addMessage('Zapisano zmiany', Flash::INFO);
 
             $this->redirect('/profile/menu');
 
         } else {
+
+            Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
 
             View::renderTemplate('Profile/edit.html', [
                 'user' => $this->user

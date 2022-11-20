@@ -1,14 +1,25 @@
 <?php
 
-use Twig\Extension\OptimizerExtension;
+/*
+ * This file is part of Twig.
+ *
+ * (c) Fabien Potencier
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-class_exists('Twig\Extension\OptimizerExtension');
+final class Twig_Extension_Optimizer extends Twig_Extension
+{
+    private $optimizers;
 
-@trigger_error('Using the "Twig_Extension_Optimizer" class is deprecated since Twig version 2.7, use "Twig\Extension\OptimizerExtension" instead.', \E_USER_DEPRECATED);
-
-if (false) {
-    /** @deprecated since Twig 2.7, use "Twig\Extension\OptimizerExtension" instead */
-    class Twig_Extension_Optimizer extends OptimizerExtension
+    public function __construct($optimizers = -1)
     {
+        $this->optimizers = $optimizers;
+    }
+
+    public function getNodeVisitors()
+    {
+        return array(new Twig_NodeVisitor_Optimizer($this->optimizers));
     }
 }

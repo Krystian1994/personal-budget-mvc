@@ -1,14 +1,36 @@
 <?php
 
-use Twig\Cache\NullCache;
+/*
+ * This file is part of Twig.
+ *
+ * (c) Fabien Potencier
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-class_exists('Twig\Cache\NullCache');
-
-@trigger_error('Using the "Twig_Cache_Null" class is deprecated since Twig version 2.7, use "Twig\Cache\NullCache" instead.', \E_USER_DEPRECATED);
-
-if (false) {
-    /** @deprecated since Twig 2.7, use "Twig\Cache\NullCache" instead */
-    class Twig_Cache_Null extends NullCache
+/**
+ * Implements a no-cache strategy.
+ *
+ * @author Fabien Potencier <fabien@symfony.com>
+ */
+final class Twig_Cache_Null implements Twig_CacheInterface
+{
+    public function generateKey($name, $className)
     {
+        return '';
+    }
+
+    public function write($key, $content)
+    {
+    }
+
+    public function load($key)
+    {
+    }
+
+    public function getTimestamp($key)
+    {
+        return 0;
     }
 }
