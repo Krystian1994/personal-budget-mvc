@@ -6,6 +6,8 @@ use \Core\View;
 use \App\Models\Expenses;
 use \App\Auth;
 use \App\Flash;
+use \App\Models\ExpensesCategories;
+use \App\Models\PaymentMethods;
 
 /**
  * Profile controller
@@ -19,20 +21,22 @@ class Expense extends Authenticated
      *
      * @return void
      */
-    protected function before()
-    {
+    protected function before(){
         parent::before();
         $this->user = Auth::getUser();
     }
 
     public function newAction(){
+        $categories = ExpensesCategories::getUserExpenseCategories();
+        $methods = PaymentMethods::getUserPaymentMethods();
         View::renderTemplate('Expense/expense.html', [
-            'user' => $this->user
+            'user' => $this->user,
+            'categories' => $categories,
+            'methods' => $methods
         ]);
     }
 
-    public function expenseAction()
-    {
+    public function expenseAction(){
         $expense = new Expenses($_POST);
 
         if ($expense->addExpense()) {

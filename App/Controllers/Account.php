@@ -17,8 +17,7 @@ class Account extends \Core\Controller
      *
      * @return void
      */
-    public function validateEmailAction()
-    {
+    public function validateEmailAction(){
         $is_valid = ! User::emailExists($_GET['email']);
         
         header('Content-Type: application/json');

@@ -6,6 +6,7 @@ use \Core\View;
 use \App\Models\Incomes;
 use \App\Auth;
 use \App\Flash;
+use \App\Models\IncomesCategories;
 
 /**
  * Profile controller
@@ -19,20 +20,20 @@ class Income extends Authenticated
      *
      * @return void
      */
-    protected function before()
-    {
+    protected function before(){
         parent::before();
         $this->user = Auth::getUser();
     }
 
     public function newAction(){
+        $categories = IncomesCategories::getUserIncomeCategories();
         View::renderTemplate('Income/income.html', [
-            'user' => $this->user
+            'user' => $this->user,
+            'categories' => $categories
         ]);
     }
 
-    public function incomeAction()
-    {
+    public function incomeAction(){
         $income = new Incomes($_POST);
  
         if ($income->addIncome()) {

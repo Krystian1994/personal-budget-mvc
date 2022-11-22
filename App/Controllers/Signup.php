@@ -18,8 +18,7 @@ class Signup extends \Core\Controller
      *
      * @return void
      */
-    public function newAction()
-    {
+    public function newAction(){
         View::renderTemplate('Signup/new.html');
     }
 
@@ -28,8 +27,7 @@ class Signup extends \Core\Controller
      *
      * @return void
      */
-    public function createAction()
-    {
+    public function createAction(){
         $user = new User($_POST);
 
         if ($user->save()) {
@@ -50,8 +48,7 @@ class Signup extends \Core\Controller
      *
      * @return void
      */
-    public function successAction()
-    {
+    public function successAction(){
         View::renderTemplate('Signup/success.html');
     }
 }

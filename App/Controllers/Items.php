@@ -30,8 +30,7 @@ class Items extends Authenticated
      *
      * @return void
      */
-    public function indexAction()
-    {
+    public function indexAction(){
         View::renderTemplate('Items/index.html');
     }
 
@@ -40,8 +39,7 @@ class Items extends Authenticated
      *
      * @return void
      */
-    public function newAction()
-    {
+    public function newAction(){
         echo "new action";
     }
 
@@ -50,8 +48,7 @@ class Items extends Authenticated
      *
      * @return void
      */
-    public function showAction()
-    {
+    public function showAction(){
         echo "show action";
     }
 }

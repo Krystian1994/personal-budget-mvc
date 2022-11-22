@@ -19,8 +19,7 @@ class Profile extends Authenticated
      *
      * @return void
      */
-    protected function before()
-    {
+    protected function before(){
         parent::before();
         $this->user = Auth::getUser();
     }
@@ -30,8 +29,7 @@ class Profile extends Authenticated
      *
      * @return void
      */
-    public function menuAction()
-    {
+    public function menuAction(){
         View::renderTemplate('Profile/menu.html', [
             'user' => $this->user
         ]);
@@ -42,8 +40,7 @@ class Profile extends Authenticated
      *
      * @return void
      */
-    public function editAction()
-    {
+    public function editAction(){
         View::renderTemplate('Profile/edit.html', [
             'user' => $this->user
         ]);
@@ -54,22 +51,114 @@ class Profile extends Authenticated
      *
      * @return void
      */
-    public function updateAction()
-    {
-        if ($this->user->updateProfile($_POST)) {
+    public function updateAction(){
+        if(isset($_POST['saveChanges'])){
+            if ($this->user->updateProfile($_POST)){
 
-            Flash::addMessage('Zapisano zmiany', Flash::INFO);
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+    
+            }else{
+    
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }     
+        }
 
-            $this->redirect('/profile/menu');
+        if(isset($_POST['deleteIncome'])){
+            if ($this->user->deleteIncomeCategory($_POST)){
 
-        } else {
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
+        }
 
-            Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+        if(isset($_POST['addIncome'])){
+            if ($this->user->addIncomeCategory($_POST)){
 
-            View::renderTemplate('Profile/edit.html', [
-                'user' => $this->user
-            ]);
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
+        }
 
+        if(isset($_POST['deleteExpense'])){
+            if ($this->user->deleteExpenseCategory($_POST)){
+
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
+        }
+
+        if(isset($_POST['addExpense'])){
+            if ($this->user->addExpenseCategory($_POST)){
+
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
+
+        }
+
+        if(isset($_POST['deletePay'])){
+            if ($this->user->deletePayCategory($_POST)){
+
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
+
+        }
+
+        if(isset($_POST['addPay'])){
+            if ($this->user->addPayCategory($_POST)){
+
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
         }
     }
 }

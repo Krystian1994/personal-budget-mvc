@@ -103,30 +103,17 @@
                         <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                             <select class="form-control" name="pay">
                                 <option value="" disabled selected hidden>Wybierz sposób płatności</option>
-                                <option value="Cash">Gotówka</option>
-                                <option value="Debit Card">Karta debetowa</option>
-                                <option value="Credit Card">Karta kredytowa</option>
+                                {% for method in methods %}
+                                    <option value={{ method.name }}>{{ method.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                             <select class="form-control" name="expense">
                                 <option value="" disabled selected hidden>Wybierz kategorię wydatku</option>
-                                <option value="Food">Jedzenie</option>
-                                <option value="Apartments">Mieszkanie</option>
-                                <option value="Transport">Transport</option>
-                                <option value="Telecommunication">Telekomunikacja</option>
-                                <option value="Health">Opieka Zdrowotna</option>
-                                <option value="Clothes">Ubranie</option>
-                                <option value="Hygiene">Higiena</option>
-                                <option value="Kids">Dzieci</option>
-                                <option value="Recreation">Rozrywka</option>
-                                <option value="Trip">Wycieczka</option>
-                                <option value="Books">Książki</option>
-                                <option value="Savings">Oszczędności</option>
-                                <option value="For Retirement">Emerytura</option>
-                                <option value="Debit Repayment">Dług</option>
-                                <option value="Gift">Darowizna</option>
-                                <option value="Another">Inne</option>
+                                {% for category in categories %}
+                                    <option value={{ category.name }}>{{ category.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">

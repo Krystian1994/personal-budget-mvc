@@ -26,14 +26,12 @@ class Expenses extends \Core\Model
      *
      * @return void
      */
-    public function __construct($data = [])
-    {
+    public function __construct($data = []){
         foreach ($data as $key => $value) {
             $this->$key = $value;
         };
     }
-    public function addExpense()
-    {
+    public function addExpense(){
         $this->validateExpense();
 
         if (empty($this->errors)) {
@@ -88,8 +86,7 @@ class Expenses extends \Core\Model
         return $paysId['id'];
     }
 
-    public function validateExpense()
-    {
+    public function validateExpense(){
         // Amount
         if ((!isset($this->amount)) || ($this->amount <= 0)) {
             $this->errors[]  = "Wprowadzona kwota wydatku jest nieprawidłowa.";

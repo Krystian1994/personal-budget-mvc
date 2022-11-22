@@ -82,7 +82,7 @@
                                                 d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                                         </svg></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="imię" name="name" value="{{ user.username }}">
+                                <input type="text" class="form-control" placeholder="imię" name="username" value="{{ user.username }}">
                             </div>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                                 <div class="input-group-prepend">
@@ -104,19 +104,19 @@
                                             <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                                         </svg></span>
                                 </div>
-                                <input id="password" type="password" class="form-control" placeholder="hasło" name="password">
+                                <input id="password" type="password" class="form-control" placeholder="hasło" name="password" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="d-flex justify-content-center col-8 border-bottom">
                                 <a class="btn btn-secondary col-md-2 m-2 p-1" href="/profile/edit" role="button">Cofnij</a>
-                                <input class="btn btn-success col-md-4 m-2 p-1" type="submit" value="Zapisz">
+                                <button type="submit" class="btn btn-success col-md-4 m-2 p-1" name="saveChanges">Zapisz</button>
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-column  ">
                             <h4 class="text-center pt-5 pb-3">Dodaj lub usuń kategorię przychodu:</h4>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <select class="form-control" name="income">
+                                <select class="form-control" name="incomeDelete">
                                     <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
                                     <option value="Salary">Wynagrodzenie</option>
                                     <option value="Interest">Odsetki Bankowe</option>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex justify-content-center col-8">
-                                    <a class="btn btn-danger mt-2 mb-3" href="/profile/edit" role="button">Usuń</a>
+                                    <button type="submit" class="btn btn-danger mt-2 mb-3" name="deleteIncome">Usuń</button>
                                 </div>
                             </div>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
@@ -136,18 +136,18 @@
                                         <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
                                       </svg></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Wpisz kategorię" name="name" >
+                                <input type="text" class="form-control" placeholder="Wpisz kategorię" name="incomeAdd" >
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex justify-content-center col-12 border-bottom">
-                                    <a class="btn btn-success mt-2 mb-3" href="/profile/edit" role="button">Dodaj</a>
+                                    <button type="submit" class="btn btn-success mt-2 mb-3" name="addIncome">Dodaj</button>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-column  ">
                             <h4 class="text-center pt-5 pb-3">Dodaj lub usuń kategorię wydatku:</h4>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <select class="form-control" name="expense">
+                                <select class="form-control" name="expenseDelete">
                                     <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
                                     <option value="Food">Jedzenie</option>
                                     <option value="Apartments">Mieszkanie</option>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex justify-content-center col-8">
-                                    <a class="btn btn-danger mt-2 mb-3" href="/profile/edit" role="button">Usuń</a>
+                                    <button type="submit" class="btn btn-danger mt-2 mb-3" name="deleteExpense">Usuń</button>
                                 </div>
                             </div>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
@@ -179,18 +179,18 @@
                                         <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
                                       </svg></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Wpisz kategorię" name="name" >
+                                <input type="text" class="form-control" placeholder="Wpisz kategorię" name="expenseAdd" >
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex justify-content-center col-12  border-bottom">
-                                    <a class="btn btn-success mt-2 mb-3" href="/profile/edit" role="button">Dodaj</a>
+                                    <button type="submit" class="btn btn-success mt-2 mb-3" name="addExpense">Dodaj</button>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-column  ">
                             <h4 class="text-center pt-5 pb-3">Dodaj lub usuń sposób płatności:</h4>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <select class="form-control" name="pay">
+                                <select class="form-control" name="payDelete">
                                     <option value="" disabled selected hidden>Wybierz i usuń</option>
                                     <option value="Cash">Gotówka</option>
                                     <option value="Debit Card">Karta debetowa</option>
@@ -199,7 +199,7 @@
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex justify-content-center col-8">
-                                    <a class="btn btn-danger mt-2 mb-3" href="/profile/edit" role="button">Usuń</a>
+                                    <button type="submit" class="btn btn-danger mt-2 mb-3" name="deletePay">Usuń</button>
                                 </div>
                             </div>
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
@@ -211,11 +211,11 @@
                                         <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
                                       </svg></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Wpisz wposób" name="name" >
+                                <input type="text" class="form-control" placeholder="Wpisz wposób" name="payAdd" >
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex justify-content-center col-12 border-bottom">
-                                    <a class="btn btn-success mt-2 mb-3" href="/profile/edit" role="button">Dodaj</a>
+                                    <button type="submit" class="btn btn-success mt-2 mb-3" name="addPay">Dodaj</button>
                                 </div>
                             </div>
                         </div>

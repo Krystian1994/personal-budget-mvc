@@ -101,6 +101,8 @@ class Balance extends Authenticated
 
         View::renderTemplate('Balance/balance.html', [
             'user' => $this->user,
+            'incomesArray' => $incomesArray,
+            'expensesArray' => $expensesArray,
             'incomesBalance' => $incomesBalance,
             'expensesBalance' => $expensesBalance,
             'difference' => $difference,

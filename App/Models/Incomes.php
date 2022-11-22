@@ -26,14 +26,12 @@ class Incomes extends \Core\Model
      *
      * @return void
      */
-    public function __construct($data = [])
-    {
+    public function __construct($data = []){
         foreach ($data as $key => $value) {
             $this->$key = $value;
         };
     }
-    public function addIncome()
-    {
+    public function addIncome(){
         $this->validateIncome();
 
         if (empty($this->errors)) {
@@ -56,8 +54,7 @@ class Incomes extends \Core\Model
         return false;
     }
 
-    public function getIdOfIncomesCategory()
-    {
+    public function getIdOfIncomesCategory(){
         $sql = 'SELECT id FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name LIKE :income';
 
         $db = static::getDB();
@@ -72,8 +69,7 @@ class Incomes extends \Core\Model
         return $incomesId['id'];
 }
 
-    public function validateIncome()
-    {
+    public function validateIncome(){
         // Amount
         if ((!isset($this->amount)) || ($this->amount <= 0)) {
             $this->errors[]  = "Wprowadzona kwota przychodu jest nieprawidłowa.";

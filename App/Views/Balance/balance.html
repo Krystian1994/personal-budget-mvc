@@ -106,7 +106,10 @@
                                     <th scope="col">Kwota:</th>
                                 </tr>
                             </thead>
-                            <tbody>  
+                            <tbody>
+                                {% for income in incomesArray %}
+                                <tr><th scope="row">{{ income.name }}:</th><td> {{ income.sumIncome }} </td></tr>
+                                {% endfor %} 
                                 <tr><th scope="row">Suma:</th><td> {{incomesBalance}} </td></tr>    
                             </tbody>
                         </table>
@@ -120,6 +123,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for expense in expensesArray %}
+                                <tr><th scope="row">{{ expense.name }}:</th><td> {{ expense.sumExpense }} </td></tr>
+                                {% endfor %} 
                                 <tr><th scope="row">Suma:</th><td> {{expensesBalance}}</td></tr>
                             </tbody>
                         </table>

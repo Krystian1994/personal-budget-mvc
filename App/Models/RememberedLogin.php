@@ -20,8 +20,7 @@ class RememberedLogin extends \Core\Model
      *
      * @return mixed Remembered login object if found, false otherwise
      */
-    public static function findByToken($token)
-    {
+    public static function findByToken($token){
         $token = new Token($token);
         $token_hash = $token->getHash();
 
@@ -44,8 +43,7 @@ class RememberedLogin extends \Core\Model
      *
      * @return User The user model
      */
-    public function getUser()
-    {
+    public function getUser(){
         return User::findByID($this->user_id);
     }
 
@@ -54,8 +52,7 @@ class RememberedLogin extends \Core\Model
      *
      * @return boolean True if the token has expired, false otherwise
      */
-    public function hasExpired()
-    {
+    public function hasExpired(){
         return strtotime($this->expires_at) < time();
     }
 
@@ -64,8 +61,7 @@ class RememberedLogin extends \Core\Model
      *
      * @return void
      */
-    public function delete()
-    {
+    public function delete(){
         $sql = 'DELETE FROM remembered_logins
                 WHERE token_hash = :token_hash';
 

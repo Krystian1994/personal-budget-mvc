@@ -18,8 +18,7 @@ class Password extends \Core\Controller
      *
      * @return void
      */
-    public function forgotAction()
-    {
+    public function forgotAction(){
         View::renderTemplate('Password/forgot.html');
     }
 
@@ -28,8 +27,7 @@ class Password extends \Core\Controller
      *
      * @return void
      */
-    public function requestResetAction()
-    {
+    public function requestResetAction(){
         User::sendPasswordReset($_POST['email']);
 
         View::renderTemplate('Password/reset_requested.html');
@@ -40,8 +38,7 @@ class Password extends \Core\Controller
      *
      * @return void
      */
-    public function resetAction()
-    {
+    public function resetAction(){
         $token = $this->route_params['token'];
 
         $user = $this->getUserOrExit($token);
@@ -56,8 +53,7 @@ class Password extends \Core\Controller
      *
      * @return void
      */
-    public function resetPasswordAction()
-    {
+    public function resetPasswordAction(){
         $token = $_POST['token'];
 
         $user = $this->getUserOrExit($token);
@@ -83,8 +79,7 @@ class Password extends \Core\Controller
      *
      * @return mixed User object if found and the token hasn't expired, null otherwise
      */
-    protected function getUserOrExit($token)
-    {
+    protected function getUserOrExit($token){
         $user = User::findByPasswordReset($token);
 
         if ($user) {

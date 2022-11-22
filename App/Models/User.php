@@ -39,8 +39,7 @@ class User extends \Core\Model
      *
      * @return boolean  True if the user was saved, false otherwise
      */
-    public function save()
-    {
+    public function save(){
         $this->validate();
         $this->recaptchaCheck();
         if (empty($this->errors)) {
@@ -52,7 +51,7 @@ class User extends \Core\Model
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':name', $this->username, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
             $stmt->execute();
@@ -87,7 +86,7 @@ class User extends \Core\Model
         $db = static::getDB();
         $stmt = $db->prepare($sql);
 
-        $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $stmt->bindValue(':name', $this->username, PDO::PARAM_STR);
         $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
 
         $stmt->execute();
@@ -175,8 +174,7 @@ class User extends \Core\Model
     // public static function emailExists($email){
     //     return static::findByEmail($email) !== false;
     // }
-    public static function emailExists($email, $ignore_id = null)
-    {
+    public static function emailExists($email, $ignore_id = null){
         $user = static::findByEmail($email);
 
         if ($user) {
@@ -281,8 +279,7 @@ class User extends \Core\Model
      *
      * @return void
      */
-    public static function sendPasswordReset($email)
-    {
+    public static function sendPasswordReset($email){
         $user = static::findByEmail($email);
 
         if ($user) {
@@ -300,8 +297,7 @@ class User extends \Core\Model
      *
      * @return void
      */
-    protected function startPasswordReset()
-    {
+    protected function startPasswordReset(){
         $token = new Token();
         $hashed_token = $token->getHash();
         $this->password_reset_token = $token->getValue();
@@ -328,8 +324,7 @@ class User extends \Core\Model
      *
      * @return void
      */
-    protected function sendPasswordResetEmail()
-    {
+    protected function sendPasswordResetEmail(){
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
 
         $text = View::getTemplate('Password/reset_email.txt', ['url' => $url]);
@@ -345,8 +340,7 @@ class User extends \Core\Model
      *
      * @return mixed User object if found and the token hasn't expired, null otherwise
      */
-    public static function findByPasswordReset($token)
-    {
+    public static function findByPasswordReset($token){
         $token = new Token($token);
         $hashed_token = $token->getHash();
 
@@ -381,8 +375,7 @@ class User extends \Core\Model
      *
      * @return boolean  True if the password was updated successfully, false otherwise
      */
-    public function resetPassword($password)
-    {
+    public function resetPassword($password){
         $this->password = $password;
 
         $this->validate();
@@ -418,7 +411,7 @@ class User extends \Core\Model
      * @return boolean  True if the data was updated, false otherwise
      */
     public function updateProfile($data){
-        $this->name = $data['name'];
+        $this->username = $data['username'];
         $this->email = $data['email'];
 
         // Only validate and update the password if a value provided
@@ -430,9 +423,7 @@ class User extends \Core\Model
 
         if (empty($this->errors)) {
 
-            $sql = 'UPDATE users
-                    SET username = :name,
-                        email = :email';
+            $sql = 'UPDATE users SET username = :name, email = :email';
 
             // Add password if it's set
             if (isset($this->password)) {
@@ -445,7 +436,7 @@ class User extends \Core\Model
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':name', $this->username, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
 
@@ -454,13 +445,96 @@ class User extends \Core\Model
 
                 $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
                 $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
-
             }
 
             return $stmt->execute();
         }
 
         return false;
+    }
+
+    public function deleteIncomeCategory($data){
+        $this->incomeName = $data['incomeDelete'];
+
+        $sql = 'DELETE FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->incomeName, PDO::PARAM_STR);
+
+        return $stmt->execute();              
+    }
+
+    public function deleteExpenseCategory($data){
+        $this->expenseName = $data['expenseDelete'];
+
+        $sql = 'DELETE FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->expenseName, PDO::PARAM_STR);
+
+        return $stmt->execute();              
+    }
+
+    public function deletePayCategory($data){
+        $this->payName = $data['payDelete'];
+
+        $sql = 'DELETE FROM payment_methods_assigned_to_users WHERE user_id = :user_id AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->payName, PDO::PARAM_STR);
+
+        return $stmt->execute();              
+    }
+
+    public function addIncomeCategory($data){
+        $this->incomeAddName = htmlentities($data['incomeAdd'],ENT_QUOTES,"UTF-8");
+
+        $sql = 'INSERT INTO incomes_category_assigned_to_users(user_id, name) VALUES (:user_id, :name)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->incomeAddName, PDO::PARAM_STR);
+
+        return $stmt->execute();              
+    }
+
+    public function addExpenseCategory($data){
+        $this->expenseAddName = htmlentities($data['expenseAdd'],ENT_QUOTES,"UTF-8");
+
+        $sql = 'INSERT INTO expenses_category_assigned_to_users(user_id, name) VALUES (:user_id, :name)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->expenseAddName, PDO::PARAM_STR);
+
+        return $stmt->execute();              
+    }
+
+    public function addPayCategory($data){
+        $this->payAddName = htmlentities($data['payAdd'],ENT_QUOTES,"UTF-8");
+
+        $sql = 'INSERT INTO payment_methods_assigned_to_users(user_id, name) VALUES (:user_id, :name)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->payAddName, PDO::PARAM_STR);
+
+        return $stmt->execute();              
     }
 }
 

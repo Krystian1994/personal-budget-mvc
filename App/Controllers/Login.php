@@ -20,8 +20,7 @@ class Login extends \Core\Controller
      *
      * @return void
      */
-    public function newAction()
-    {
+    public function newAction(){
         View::renderTemplate('Login/new.html');
     }
 
@@ -30,8 +29,7 @@ class Login extends \Core\Controller
      *
      * @return void
      */
-    public function createAction()
-    {
+    public function createAction(){
         $user = User::authenticate($_POST['email'], $_POST['password']);
         
         $remember_me = isset($_POST['remember_me']);
@@ -59,8 +57,7 @@ class Login extends \Core\Controller
      *
      * @return void
      */
-    public function destroyAction()
-    {
+    public function destroyAction(){
         Auth::logout();
 
         $this->redirect('/login/show-logout-message');
@@ -73,8 +70,7 @@ class Login extends \Core\Controller
      *
      * @return void
      */
-    public function showLogoutMessageAction()
-    {
+    public function showLogoutMessageAction(){
         Flash::addMessage('Logout successful');
 
         $this->redirect('/');
