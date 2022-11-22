@@ -1,2 +1,4 @@
 vendor/
 public/
+App/Config.php
+App/Mail.php
