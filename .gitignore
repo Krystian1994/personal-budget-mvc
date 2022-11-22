@@ -1,0 +1,4 @@
+vendor
+logs
+App\Config.php
+App\Mail.php
