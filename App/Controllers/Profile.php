@@ -5,6 +5,9 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Auth;
 use \App\Flash;
+use \App\Models\IncomesCategories;
+use \App\Models\ExpensesCategories;
+use \App\Models\PaymentMethods;
 
 /**
  * Profile controller
@@ -41,8 +44,14 @@ class Profile extends Authenticated
      * @return void
      */
     public function editAction(){
+        $categoriesInc = IncomesCategories::getUserIncomeCategories();
+        $categoriesExp = ExpensesCategories::getUserExpenseCategories();
+        $methods = PaymentMethods::getUserPaymentMethods();
         View::renderTemplate('Profile/edit.html', [
-            'user' => $this->user
+            'user' => $this->user,
+            'categoriesInc' => $categoriesInc,
+            'categoriesExp' => $categoriesExp,
+            'methods' => $methods
         ]);
     }
 

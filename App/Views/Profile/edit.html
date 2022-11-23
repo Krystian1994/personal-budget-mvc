@@ -118,10 +118,9 @@
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                                 <select class="form-control" name="incomeDelete">
                                     <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
-                                    <option value="Salary">Wynagrodzenie</option>
-                                    <option value="Interest">Odsetki Bankowe</option>
-                                    <option value="Allegro">Sprzedaż na Allegro</option>
-                                    <option value="Another">Inne</option>
+                                    {% for category in categoriesInc %}
+                                    <option value={{ category.name }}>{{ category.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">
@@ -149,22 +148,9 @@
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                                 <select class="form-control" name="expenseDelete">
                                     <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
-                                    <option value="Food">Jedzenie</option>
-                                    <option value="Apartments">Mieszkanie</option>
-                                    <option value="Transport">Transport</option>
-                                    <option value="Telecommunication">Telekomunikacja</option>
-                                    <option value="Health">Opieka Zdrowotna</option>
-                                    <option value="Clothes">Ubranie</option>
-                                    <option value="Hygiene">Higiena</option>
-                                    <option value="Kids">Dzieci</option>
-                                    <option value="Recreation">Rozrywka</option>
-                                    <option value="Trip">Wycieczka</option>
-                                    <option value="Books">Książki</option>
-                                    <option value="Savings">Oszczędności</option>
-                                    <option value="For Retirement">Emerytura</option>
-                                    <option value="Debit Repayment">Dług</option>
-                                    <option value="Gift">Darowizna</option>
-                                    <option value="Another">Inne</option>
+                                    {% for category in categoriesExp %}
+                                    <option value={{ category.name }}>{{ category.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">
@@ -192,9 +178,9 @@
                             <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                                 <select class="form-control" name="payDelete">
                                     <option value="" disabled selected hidden>Wybierz i usuń</option>
-                                    <option value="Cash">Gotówka</option>
-                                    <option value="Debit Card">Karta debetowa</option>
-                                    <option value="Credit Card">Karta kredytowa</option>
+                                    {% for method in methods %}
+                                    <option value={{ method.name }}>{{ method.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">

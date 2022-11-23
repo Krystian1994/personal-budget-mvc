@@ -39,7 +39,7 @@ class Income extends Authenticated
         if ($income->addIncome()) {
             Flash::addMessage('Przychód został dodany.',Flash::INFO);
 
-            $this->redirect('/Income/new');
+            $this->redirect('/income/new');
         } else {
             Flash::addMessage('Błąd. Przychód nie został dodany.',Flash::WARNING);
 

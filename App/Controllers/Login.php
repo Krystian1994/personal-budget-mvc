@@ -40,8 +40,7 @@ class Login extends \Core\Controller
 
             Flash::addMessage('Zostałeś Zalogowany.');
 
-            $this->redirect('/profile/menu');
-
+            $this->redirect('/Profile/menu');
         } else {
             Flash::addMessage('Logowanie nie powiodło się, spróbuj jeszcze raz.', Flash::WARNING);
 
