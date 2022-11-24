@@ -112,6 +112,7 @@ class Balance extends Authenticated
 
     private function sum($array){
         $sum = 0;
+        $sum = number_format($sum,2);
         foreach($array as $row){
             $sum += $row[1];
         }

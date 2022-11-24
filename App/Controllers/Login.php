@@ -34,11 +34,9 @@ class Login extends \Core\Controller
         
         $remember_me = isset($_POST['remember_me']);
 
+        Auth::login($user, $remember_me);
         if ($user) {
-
-            Auth::login($user, $remember_me);
-
-            Flash::addMessage('Zostałeś Zalogowany.');
+            
 
             $this->redirect('/Profile/menu');
         } else {
@@ -70,7 +68,7 @@ class Login extends \Core\Controller
      * @return void
      */
     public function showLogoutMessageAction(){
-        Flash::addMessage('Logout successful');
+        Flash::addMessage('Wylogowano');
 
         $this->redirect('/');
     }

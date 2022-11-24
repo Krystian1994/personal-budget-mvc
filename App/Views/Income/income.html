@@ -103,7 +103,7 @@
                             <select class="form-control" name="income">
                                 <option value="" disabled selected hidden>Wybierz rodzaj przychodu</option>
                                 {% for category in categories %}
-                                    <option value={{ category.name }}>{{ category.name }}</option>
+                                    <option value="{{ category.name }}">{{ category.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -124,4 +124,5 @@
     </div>
 
 </article>
+<script src="/js/appDate.js"></script>
 {% endblock %}

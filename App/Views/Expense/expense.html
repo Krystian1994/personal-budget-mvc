@@ -104,7 +104,7 @@
                             <select class="form-control" name="pay">
                                 <option value="" disabled selected hidden>Wybierz sposób płatności</option>
                                 {% for method in methods %}
-                                    <option value={{ method.name }}>{{ method.name }}</option>
+                                    <option value="{{ method.name }}">{{ method.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -112,7 +112,7 @@
                             <select class="form-control" name="expense">
                                 <option value="" disabled selected hidden>Wybierz kategorię wydatku</option>
                                 {% for category in categories %}
-                                    <option value={{ category.name }}>{{ category.name }}</option>
+                                    <option value="{{ category.name }}">{{ category.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -133,4 +133,5 @@
     </div>
 
 </article>
+<script src="/js/appDate.js"></script>
 {% endblock %}
