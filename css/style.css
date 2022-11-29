@@ -1,0 +1,30 @@
+body {
+    background-image: url('../img/concrete_wall.png');
+    font-family: 'Merriweather', sans-serif;
+}
+
+.bi bi-calendar-check {
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 1rem
+    }
+}
+
+#logIn {
+    font-size: 0.8rem;
+}
