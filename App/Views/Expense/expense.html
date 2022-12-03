@@ -98,7 +98,7 @@
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg></span>
                             </div>
-                            <input id="actualDate" type="date" class="form-control" name="date" min="2022-01-01">
+                            <input id="actualDate" value="" type="date" class="form-control" name="date" min="2022-01-01">
                         </div>
                         <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                             <select class="form-control" name="pay">
@@ -109,13 +109,14 @@
                             </select>
                         </div>
                         <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                            <select class="form-control" name="expense">
+                            <select id="expenseChange" class="form-control" name="expense">
                                 <option value="" disabled selected hidden>Wybierz kategorię wydatku</option>
                                 {% for category in categories %}
                                     <option value="{{ category.name }}">{{ category.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
+                        <div class="result"></div>
                         <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                                 placeholder="Dodaj komentarz" name="comment"></textarea>
@@ -134,4 +135,5 @@
 
 </article>
 <script src="/js/appDate.js"></script>
+<script src="/js/limit.js"></script>
 {% endblock %}

@@ -71,152 +71,276 @@
                     </div>
                 </nav>
                 <div class="col-12 col-sm-6 col-md-9 p-3">
-                    <form method="post" action="/profile/update">
-                        <div class="d-flex align-items-center flex-column">
-                            <h4 class="text-center pt-2 pb-3">Zmień dane dotyczące konta:</h4>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                        </svg></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="imię" name="username" value="{{ user.username }}">
-                            </div>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                            <path
-                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                                        </svg></span>
-                                </div>
-                                <input type="email" class="form-control" placeholder="e-mail" name="email" value="{{ user.email }}">
-                            </div>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <div class=" input-group-prepend">
-                                    <span id="showPassword" class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                            width="16" height="16" fill="currentColor" class="bi bi-key"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
-                                            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                        </svg></span>
-                                </div>
-                                <input id="password" type="password" class="form-control" placeholder="hasło" name="password" required>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="d-flex justify-content-center col-8 border-bottom">
-                                <a class="btn btn-secondary col-md-2 m-2 p-1" href="/profile/edit" role="button">Cofnij</a>
-                                <button type="submit" class="btn btn-success col-md-4 m-2 p-1" name="saveChanges">Zapisz</button>
-                            </div>
-                        </div>
-                    </form>
-                    <form method="post" action="/profile/update">
-                        <div class="d-flex align-items-center flex-column  ">
-                            <h4 class="text-center pt-5 pb-3">Dodaj lub usuń kategorię przychodu:</h4>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <select class="form-control" name="incomeDelete">
-                                    <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
-                                    {% for category in categoriesInc %}
-                                    <option value="{{ category.name }}">{{ category.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center col-8">
-                                    <button type="submit" class="btn btn-danger mt-2 mb-3" name="deleteIncome">Usuń</button>
-                                </div>
-                            </div>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
-                                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                                      </svg></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Wpisz kategorię" name="incomeAdd" >
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center col-12 border-bottom">
-                                    <button type="submit" class="btn btn-success mt-2 mb-3" name="addIncome">Dodaj</button>
-                                </div>
+                    <div class="d-flex align-items-center flex-column">
+                        <button 
+                            class="btn btn-secondary collapsed bt-sm m-3"
+                            data-bs-toggle="collapse"
+                            href="#multiCollapseExample1"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="multiCollapseExample1"
+                            width="22"
+                            height="22"
+                        >
+                            Zmień dane dotyczące konta
+                        </button>
+                        <div class="col">
+                            <div class="multi-collapse collapse" id="multiCollapseExample1">
+                                <form method="post" action="/profile/update">
+                                    <div class="d-flex align-items-center flex-column">
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                                    </svg></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="imię" name="username" value="{{ user.username }}">
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                                                    </svg></span>
+                                            </div>
+                                            <input type="email" class="form-control" placeholder="e-mail" name="email" value="{{ user.email }}">
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class=" input-group-prepend">
+                                                <span id="showPassword" class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        width="16" height="16" fill="currentColor" class="bi bi-key"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
+                                                        <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                    </svg></span>
+                                            </div>
+                                            <input id="password" type="password" class="form-control" placeholder="hasło" name="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="d-flex justify-content-center col-8 border-bottom">
+                                            <a class="btn btn-secondary col-md-2 m-2 p-1" href="/profile/edit" role="button">Cofnij</a>
+                                            <button type="submit" class="btn btn-success col-md-4 m-2 p-1" name="saveChanges">Zapisz</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>    
-                    <form method="post" action="/profile/update">
-                        <div class="d-flex align-items-center flex-column  ">
-                            <h4 class="text-center pt-5 pb-3">Dodaj lub usuń kategorię wydatku:</h4>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <select class="form-control" name="expenseDelete">
-                                    <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
-                                    {% for category in categoriesExp %}
-                                    <option value="{{ category.name }}">{{ category.name }}</option>
-                                    {% endfor %}
-                                </select>
+                        <button 
+                            class="btn btn-secondary collapsed bt-sm m-3"
+                            data-bs-toggle="collapse"
+                            href="#multiCollapseExample2"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="multiCollapseExample2"
+                            width="22"
+                            height="22"
+                        >
+                        Dodaj lub usuń kategorię przychodu
+                        </button>
+                        <div class="col">
+                            <div class="multi-collapse collapse" id="multiCollapseExample2">
+                                <form method="post" action="/profile/update">
+                                    <div class="d-flex align-items-center flex-column  ">
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <select class="form-control" name="incomeDelete">
+                                                <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
+                                                {% for category in categoriesInc %}
+                                                <option value="{{ category.name }}">{{ category.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center col-8">
+                                                <button type="submit" class="btn btn-danger mt-2 mb-3" name="deleteIncome">Usuń</button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+                                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                                </svg></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Wpisz kategorię" name="incomeAdd" >
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center col-12 border-bottom">
+                                                <button type="submit" class="btn btn-success mt-2 mb-3" name="addIncome">Dodaj</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>  
                             </div>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center col-8">
-                                    <button type="submit" class="btn btn-danger mt-2 mb-3" name="deleteExpense">Usuń</button>
-                                </div>
+                        </div>  
+                        <button 
+                        class="btn btn-secondary collapsed bt-sm m-3"
+                        data-bs-toggle="collapse"
+                        href="#multiCollapseExample3"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="multiCollapseExample3"
+                        width="22"
+                        height="22"
+                        >
+                        Dodaj lub usuń kategorię wydatku
+                        </button>
+                        <div class="col">
+                            <div class="multi-collapse collapse" id="multiCollapseExample3">
+                                <form method="post" action="/profile/update">
+                                    <div class="d-flex align-items-center flex-column  ">
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <select class="form-control" name="expenseDelete">
+                                                <option value="" disabled selected hidden>Wybierz kategorię i usuń</option>
+                                                {% for category in categoriesExp %}
+                                                <option value="{{ category.name }}">{{ category.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center col-8">
+                                                <button type="submit" class="btn btn-danger mt-2 mb-3" name="deleteExpense">Usuń</button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-dash" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                                </svg></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Wpisz kategorię" name="expenseAdd" >
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center col-12  border-bottom">
+                                                <button type="submit" class="btn btn-success mt-2 mb-3" name="addExpense">Dodaj</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-dash" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
-                                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                                      </svg></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Wpisz kategorię" name="expenseAdd" >
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center col-12  border-bottom">
-                                    <button type="submit" class="btn btn-success mt-2 mb-3" name="addExpense">Dodaj</button>
-                                </div>
+                        </div>  
+                        <button 
+                        class="btn btn-secondary collapsed bt-sm m-3"
+                        data-bs-toggle="collapse"
+                        href="#multiCollapseExample4"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="multiCollapseExample4"
+                        width="22"
+                        height="22"
+                        >
+                        Dodaj lub usuń sposób płatności
+                        </button>
+                        <div class="col">
+                            <div class="multi-collapse collapse" id="multiCollapseExample4">
+                                <form method="post" action="/profile/update">
+                                    <div class="d-flex align-items-center flex-column  ">
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <select class="form-control" name="payDelete">
+                                                <option value="" disabled selected hidden>Wybierz i usuń</option>
+                                                {% for method in methods %}
+                                                <option value="{{ method.name }}">{{ method.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center col-8">
+                                                <button type="submit" class="btn btn-danger mt-2 mb-3" name="deletePay">Usuń</button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+                                                    <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
+                                                    <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
+                                                    <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+                                                    </svg></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Wpisz wposób" name="payAdd" >
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center col-12 border-bottom">
+                                                <button type="submit" class="btn btn-success mt-2 mb-3" name="addPay">Dodaj</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
-                    <form method="post" action="/profile/update">
-                        <div class="d-flex align-items-center flex-column  ">
-                            <h4 class="text-center pt-5 pb-3">Dodaj lub usuń sposób płatności:</h4>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <select class="form-control" name="payDelete">
-                                    <option value="" disabled selected hidden>Wybierz i usuń</option>
-                                    {% for method in methods %}
-                                    <option value="{{ method.name }}">{{ method.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center col-8">
-                                    <button type="submit" class="btn btn-danger mt-2 mb-3" name="deletePay">Usuń</button>
-                                </div>
-                            </div>
-                            <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
-                                        <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
-                                        <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
-                                        <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
-                                        </svg></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Wpisz wposób" name="payAdd" >
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center col-12 border-bottom">
-                                    <button type="submit" class="btn btn-success mt-2 mb-3" name="addPay">Dodaj</button>
-                                </div>
+                        <button 
+                        class="btn btn-secondary collapsed bt-sm m-3"
+                        data-bs-toggle="collapse"
+                        href="#multiCollapseExample5"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="multiCollapseExample5"
+                        width="22"
+                        height="22"
+                        >
+                        Dodaj miesięczny limit na swoje wydatki
+                        </button>
+                        <div class="col">
+                            <div class="multi-collapse collapse" id="multiCollapseExample5">
+                                <form method="post" action="/profile/update">
+                                    <div class="d-flex align-items-center flex-column  ">
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <select class="form-control" name="expenseName">
+                                                <option value="" disabled selected hidden>Wybierz kategorię wydatku</option>
+                                                {% for category in categoriesExp %}
+                                                <option value="{{ category.name }}">{{ category.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class=" input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        width="20" height="20" fill="currentColor" class="bi bi-pencil-square"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                    </svg></span>
+                                            </div>
+                                            <input id="actualDate" type="month" class="form-control" name="date" min="2022-01">
+                                        </div>
+                                        <div class="input-group col-xs-12 col-sm-10 col-md-6 col-lg-5 m-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        width="20" height="20" fill="currentColor" class="bi bi-pencil-square"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                    </svg></span>
+                                            </div>
+                                            <input type="number" min="0.01" step="0.01" class="form-control"
+                                                placeholder="limit" name="limit" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="d-flex justify-content-center col-8 border-bottom">
+                                            <a class="btn btn-secondary col-md-2 m-2 p-1" href="/profile/edit" role="button">Cofnij</a>
+                                            <button type="submit" class="btn btn-success col-md-4 m-2 p-1" name="addLimit">Dodaj</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
-                    </form>
+
+                    </div>
                 </div>
             </div>
         </div>
     
     </article>
     <script src="/js/appShow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

@@ -169,5 +169,20 @@ class Profile extends Authenticated
                 ]);
             }
         }
+
+        if(isset($_POST['addLimit'])){
+            if ($this->user->addLimit($_POST)){
+
+                Flash::addMessage('Zapisano zmiany', Flash::INFO);
+    
+                $this->redirect('/profile/menu');
+            }else{
+                Flash::addMessage('Nie zapisano zmian',Flash::WARNING);
+    
+                View::renderTemplate('Profile/edit.html', [
+                    'user' => $this->user
+                ]);
+            }
+        }
     }
 }

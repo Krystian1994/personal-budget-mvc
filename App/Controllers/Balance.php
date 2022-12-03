@@ -93,11 +93,11 @@ class Balance extends Authenticated
         $incomesArray = Balances::incomesBalance($startDate,$endDate);
         $expensesArray = Balances::expensesBalance($startDate,$endDate);
 
-        $incomesBalance = $this->sum($incomesArray);
-        $expensesBalance = $this->sum($expensesArray);
+        $incomesBalance = Balances::sum($incomesArray);
+        $expensesBalance = Balances::sum($expensesArray);
 
-        $difference = $this->sumOfBalance($incomesBalance,$expensesBalance);
-        $statement = $this->getStatement($incomesBalance,$expensesBalance);
+        $difference = Balances::sumOfBalance($incomesBalance,$expensesBalance);
+        $statement = Balances::getStatement($incomesBalance,$expensesBalance);
 
         View::renderTemplate('Balance/balance.html', [
             'user' => $this->user,
@@ -108,29 +108,5 @@ class Balance extends Authenticated
             'difference' => $difference,
             'statement' => $statement,
         ]);
-    }
-
-    private function sum($array){
-        $sum = 0;
-        $sum = number_format($sum,2);
-        foreach($array as $row){
-            $sum += $row[1];
-        }
-        return $sum;
-    }
-
-    private function getStatement($firstArg, $secondArg){
-        if($firstArg > $secondArg){
-            return "Dobrze zarządzasz budżetem. Twój bilans wynosi: ";
-        } else if($firstArg < $secondArg){
-            return "Wpadasz w długi. Twój bilans wynosi: ";
-        } else {
-            return "Twój bilans wynosi: ";
-        }
-    }
-
-    private function sumOfBalance($firstArg, $secondArg){
-        $difference =  ($firstArg - $secondArg);
-        return $difference;
     }
 }

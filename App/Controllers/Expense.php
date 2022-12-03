@@ -52,4 +52,15 @@ class Expense extends Authenticated
             ]);
         }
     }
+
+
+
+
+    public function expensesAction(){
+        echo json_encode(ExpensesCategories::getUserExpenseCategories(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function limitAction(){
+        echo json_encode(ExpensesCategories::getUserExpenseCategories($_POST), JSON_UNESCAPED_UNICODE);
+    }
 }

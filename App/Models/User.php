@@ -536,5 +536,25 @@ class User extends \Core\Model
 
         return $stmt->execute();              
     }
+
+    public function addLimit($data){
+        $this->expenseName = $data['expenseName'];
+        $this->limit = $data['limit'];  
+
+        $dayDate = '-00';
+        $fullDate = $data['date'].$dayDate;
+        
+        $sql = 'UPDATE expenses_category_assigned_to_users SET limit_expense = :limit_expense, date_of_limit = :date_of_limit WHERE user_id = :user_id AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':limit_expense', $this->limit, PDO::PARAM_INT);
+        $stmt->bindValue(':date_of_limit', $fullDate, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->expenseName, PDO::PARAM_STR);
+
+        return $stmt->execute();           
+    }  
 }
 
