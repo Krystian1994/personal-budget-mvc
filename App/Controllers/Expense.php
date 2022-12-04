@@ -56,11 +56,15 @@ class Expense extends Authenticated
 
 
 
-    public function expensesAction(){
-        echo json_encode(ExpensesCategories::getUserExpenseCategories(), JSON_UNESCAPED_UNICODE);
-    }
+    // public function expensesAction(){
+    //     echo json_encode(ExpensesCategories::getUserExpenseCategories(), JSON_UNESCAPED_UNICODE);
+    // }
 
     public function limitAction(){
-        echo json_encode(ExpensesCategories::getUserExpenseCategories($_POST), JSON_UNESCAPED_UNICODE);
+        Flash::addMessage('pushnelo do PHP controllera', Flash::INFO);
+        
+        $category = $this->route_params['category'];
+    
+        echo json_encode(ExpensesCategories::getUserExpenseCategories($category), JSON_UNESCAPED_UNICODE);
     }
 }

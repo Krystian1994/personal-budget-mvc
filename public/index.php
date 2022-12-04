@@ -41,8 +41,8 @@ $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'ac
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 $router->add('{controller}/{action}');
 
-$router->add('api/expense', ['controller' => 'Expense', 'action' => 'expenses']);
-$router->add('api/limit', ['controller' => 'Expense', 'action' => 'limit']);
+// // $router->add('api/expense', ['controller' => 'Expense', 'action' => 'expenses']);
+$router->add('api/limit/{category:[\wżźćńółęąśŻŹĆĄŚĘŁÓŃ ]+}', ['controller' => 'Expense', 'action' => 'limit']);
 
 
 $router->dispatch($_SERVER['QUERY_STRING']);
