@@ -96,4 +96,21 @@ class DateValidator
         return true;
     }
 
+    public static function getStartSelectedDate($selectedDate){
+        $timestamp = strtotime($selectedDate); 
+        $month=date('m',$timestamp);
+        $year=date('Y',$timestamp);
+       
+        $date = $year.'-'.$month.'-01';
+        return $date;
+    }
+
+    public static function getEndSelectedDate($selectedDate){
+        $timestamp = strtotime($selectedDate); 
+        $month=date('m',$timestamp);
+        $year=date('Y',$timestamp);
+
+        $date = "{$year}-{$month}-31";
+        return $date;
+    }
 }

@@ -53,18 +53,16 @@ class Expense extends Authenticated
         }
     }
 
+    public function expenseSumMonthlyAction(){
+        $category = $this->route_params['category'];
+        $date = $this->route_params['date'];
 
+        echo json_encode(ExpensesCategories::getSumExpenseCategoriesMonthly($category,$date), JSON_UNESCAPED_UNICODE);
+    }
 
-
-    // public function expensesAction(){
-    //     echo json_encode(ExpensesCategories::getUserExpenseCategories(), JSON_UNESCAPED_UNICODE);
-    // }
-
-    public function limitAction(){
-        Flash::addMessage('pushnelo do PHP controllera', Flash::INFO);
-        
+    public function limitAction(){ 
         $category = $this->route_params['category'];
     
-        echo json_encode(ExpensesCategories::getUserExpenseCategories($category), JSON_UNESCAPED_UNICODE);
+        echo json_encode(ExpensesCategories::getLimitExpenseCategories($category), JSON_UNESCAPED_UNICODE);
     }
 }
