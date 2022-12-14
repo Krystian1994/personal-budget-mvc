@@ -8,18 +8,7 @@ use \App\Models\Balances;
 use \App\Auth;
 use \App\Flash;
 
-/**
- * Profile controller
- *
- * PHP version 7.0
- */
-class Balance extends Authenticated
-{
-        /**
-     * Before filter - called before each action method
-     *
-     * @return void
-     */
+class Balance extends Authenticated{
     protected function before(){
         parent::before();
         $this->user = Auth::getUser();

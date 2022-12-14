@@ -5,27 +5,9 @@ namespace App\Models;
 use PDO;
 use \App\Token;
 
-/**
- * User model
- *
- * PHP version 7.0
- */
-class Incomes extends \Core\Model
-{
-    /**
-     * Error messages
-     *
-     * @var array
-     */
+class Incomes extends \Core\Model{
     public $errors = [];
 
-    /**
-     * Class constructor
-     *
-     * @param array $data  Initial property values (optional)
-     *
-     * @return void
-     */
     public function __construct($data = []){
         foreach ($data as $key => $value) {
             $this->$key = $value;

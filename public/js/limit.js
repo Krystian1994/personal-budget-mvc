@@ -6,7 +6,13 @@ const renderLimit= (e) => {
 
 const renderBalance = (e) => {
     const result = document.querySelector('#balance');
-    result.textContent = `Bilans ${e}`;
+    if(!(isNaN(e))){
+        const balance = e.toFixed(2);
+        result.textContent = `Bilans ${balance}`;
+    }else{
+        renderNullBalance();
+    }
+    
 };
 
 const renderNullLimit = () => {
@@ -47,33 +53,18 @@ const calculate = (sum,limit) => {
     }
 };
 
-
 const eventsSumAction = async (category, limit, selectDate) => {
     if(category && selectDate) {
         const sum = await getSumForCategory(category, selectDate);
-        if(sum>0){
-            const balance = calculate(sum,limit);
-            renderBalance(balance);
-        }else{
-            renderNullBalance();
-        }
-        
+        return sum;
     }
 };
 
-// const eventsSumAction = async (category, limit, selectDate) => {
-//     if(category && selectDate) {
-//         const sum = await getSumForCategory(category, selectDate);
-//         return sum;
-//     }
-// };
 
-
-const eventsLimitAction = async (category, selectDate) => {
+const eventsLimitAction = async (category) => {
     if(!!category) {
         const limit = await getLimitForCategory(category);
         if(limit>0){
-            eventsSumAction(category, limit, selectDate);
             renderLimit(limit);
             return limit;
         } else {
@@ -82,20 +73,13 @@ const eventsLimitAction = async (category, selectDate) => {
     }
 };
 
-
-// const eventsLimitAction = async (category) => {
-//     if(!!category) {
-//         const limit = await getLimitForCategory(category);
-//         if(limit>0){
-//             renderLimit(limit);
-//             return limit;
-//         } else {
-//             renderNullLimit();
-//         }
-//     }
-// };
-
 const selectCategory = document.querySelector('#expenseChange');
+
+selectCategory.addEventListener('change', (s) => {
+    const categoryLimit = s.target.value; 
+    const returnedValue = eventsLimitAction(categoryLimit); 
+});
+
 
 const selectDate = document.querySelector('#actualDate');
 
@@ -103,32 +87,38 @@ const selectAmount = document.querySelector('#actualAmount');
 
 window.addEventListener('load', () => {
     var date = selectDate.value; 
-    var amount = 0;
+    var amount = 0.00;
     var category = selectCategory.value;
 
     selectDate.addEventListener('input', (s) => {
         date = s.target.value; 
+        someAction(category);
     });
 
     selectCategory.addEventListener('change', (s) => {
         category = s.target.value; 
-        renderNullBalance();
-        eventsLimitAction(category, date);
-        // var limitCat = eventsLimitAction(category);
-        // var sumCat = eventsSumAction(category,limitCat,date);
-        // if(sumCat>0){
-        //     const balance = calculate(sum,limit);
-        //     renderBalance(balance);
-        // }else{
-        //     renderNullBalance();
-        // }
-        
-
-        selectAmount.addEventListener('input', (s) => {
-            amount = s.target.value; 
-            // console.log(amount);
-            // console.log(limitCat);
-        });
+        someAction(category);     
     });
+    
+    selectAmount.addEventListener('input', (s) => {
+        amount = s.target.value; 
+        someAction(category); 
+    });
+
+    const someAction = async (category) => {
+        const limitCat = await eventsLimitAction(category);
+        if(!(limitCat<=0)){
+            const sumCat = await eventsSumAction(category,limitCat,date);
+            if(sumCat>0){
+                var balance = calculate(sumCat,limitCat);
+                balance -= amount;
+                renderBalance(balance);
+            }else{
+                renderNullBalance();
+            }
+        }
+    };
+
+
 });
 

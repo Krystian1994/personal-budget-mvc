@@ -6,11 +6,6 @@ use PDO;
 use \App\Token;
 use \App\DateValidator;
 
-/**
- * User model
- *
- * PHP version 7.0
- */
 class ExpensesCategories extends \Core\Model{
 
     public static function getUserExpenseCategories(){

@@ -6,13 +6,7 @@ use \Core\View;
 use \App\Auth;
 use \App\Flash;
 
-/**
- * Profile controller
- *
- * PHP version 7.0
- */
-class DateValidator
-{
+class DateValidator{
     public static function getActualDate(){
         return date('Y-m-d');
     }
@@ -92,7 +86,6 @@ class DateValidator
         if($secondDate < $firstDate){
             return false;
         }
-        
         return true;
     }
 

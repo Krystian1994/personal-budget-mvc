@@ -5,19 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Auth;
 
-/**
- * Home controller
- *
- * PHP version 7.0
- */
-class Home extends \Core\Controller
-{
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
+class Home extends \Core\Controller{
     public function indexAction(){
         View::renderTemplate('Home/index.html', [
             // 'user' => Auth::getUser()

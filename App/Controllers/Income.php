@@ -8,18 +8,7 @@ use \App\Auth;
 use \App\Flash;
 use \App\Models\IncomesCategories;
 
-/**
- * Profile controller
- *
- * PHP version 7.0
- */
-class Income extends Authenticated
-{
-        /**
-     * Before filter - called before each action method
-     *
-     * @return void
-     */
+class Income extends Authenticated{
     protected function before(){
         parent::before();
         $this->user = Auth::getUser();

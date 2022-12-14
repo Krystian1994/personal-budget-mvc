@@ -9,18 +9,7 @@ use \App\Flash;
 use \App\Models\ExpensesCategories;
 use \App\Models\PaymentMethods;
 
-/**
- * Profile controller
- *
- * PHP version 7.0
- */
-class Expense extends Authenticated
-{
-        /**
-     * Before filter - called before each action method
-     *
-     * @return void
-     */
+class Expense extends Authenticated{
     protected function before(){
         parent::before();
         $this->user = Auth::getUser();
