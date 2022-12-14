@@ -113,6 +113,9 @@ window.addEventListener('load', () => {
                 var balance = calculate(sumCat,limitCat);
                 balance -= amount;
                 renderBalance(balance);
+            }else if(!(sumCat>0) && (amount > 0.00)) {
+                var balance = calculate(amount,limitCat);
+                renderBalance(balance);
             }else{
                 renderNullBalance();
             }
