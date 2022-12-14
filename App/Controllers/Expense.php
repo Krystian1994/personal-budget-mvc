@@ -34,10 +34,14 @@ class Expense extends Authenticated{
             $this->redirect('/Expense/new');
         } else {
             Flash::addMessage('Błąd. Wydatek nie został dodany.', Flash::WARNING);
-
+            
+            $categories = ExpensesCategories::getUserExpenseCategories();
+            $methods = PaymentMethods::getUserPaymentMethods();
             View::renderTemplate('Expense/expense.html', [
                 'expense' => $expense,
-                'user' => $this->user
+                'user' => $this->user,
+                'categories' => $categories,
+                'methods' => $methods
             ]);
         }
     }

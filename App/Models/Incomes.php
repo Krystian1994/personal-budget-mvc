@@ -61,7 +61,8 @@ class Incomes extends \Core\Model{
         $this->comment = htmlentities($this->comment,ENT_QUOTES,"UTF-8");
 
         // Date
-        if(!isset($this->date)){
+        $badDate = '';
+        if($this->date == $badDate){
             $this->errors[] = "Nie podano daty przychodu.";
         }
         

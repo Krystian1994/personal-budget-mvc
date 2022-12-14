@@ -32,9 +32,12 @@ class Income extends Authenticated{
         } else {
             Flash::addMessage('Błąd. Przychód nie został dodany.',Flash::WARNING);
 
+            $categories = IncomesCategories::getUserIncomeCategories();
+
             View::renderTemplate('Income/income.html', [
                 'income' => $income,
-                'user' => $this->user
+                'user' => $this->user,
+                'categories' => $categories
             ]);
         }
     }

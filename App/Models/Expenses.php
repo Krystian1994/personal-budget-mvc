@@ -78,8 +78,9 @@ class Expenses extends \Core\Model
         // Comment
         $this->comment = htmlentities($this->comment,ENT_QUOTES,"UTF-8");
 
-        // Date
-        if(!isset($this->date)){
+        //Date
+        $badDate = '';
+        if($this->date == $badDate){
             $this->errors[] = "Nie podano daty wydatku.";
         }
         
